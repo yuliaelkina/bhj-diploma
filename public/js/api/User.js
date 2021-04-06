@@ -9,7 +9,7 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
-
+    localStorage.setItem(moneyManagerUser) = user;
   }
 
   /**
@@ -17,7 +17,7 @@ class User {
    * пользователе из локального хранилища.
    * */
   static unsetCurrent() {
-
+    localStorage.removeItem(moneyManagerUser);
   }
 
   /**
@@ -25,7 +25,7 @@ class User {
    * из локального хранилища
    * */
   static current() {
-
+    localStorage.getItem(moneyManagerUser);
   }
 
   /**

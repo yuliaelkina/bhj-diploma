@@ -207,4 +207,7 @@ class App {
     this.getForm("createIncome").renderAccountsList();
     this.getForm("createExpense").renderAccountsList();
   }
-}
+};
+
+new App();
+
