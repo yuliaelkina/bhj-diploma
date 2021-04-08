@@ -3,8 +3,7 @@ class Modal {
 
   constructor(element) {
     if (!element) {
-     alert("Элемент не передан");
-     return
+     throw new Error("элемент не передан");
     }
       this.element = element;
       this.registerEvents();
