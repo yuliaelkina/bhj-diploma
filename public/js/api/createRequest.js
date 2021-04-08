@@ -7,7 +7,7 @@ const createRequest = (options = {}) => {
   xhr.responseType = options.responseType;
   if (options.data && options.method != "GET") {
     xhr.open(`${options.method}`, `${options.url}`);
-    xhr.send(`${option.data}`);
+    xhr.send(options.data);
   }
   else {
     xhr.open(`${options.method}`, `${options.url}` + `?` + ``);
@@ -16,7 +16,7 @@ const createRequest = (options = {}) => {
   xhr.onreadystatechange = function() {
     console.log(xhr.readyState);
     if(xhr.readyState === 4) {
-      console.log(xhr.responseText);
+      console.log(xhr.response);
     };
   }
 }

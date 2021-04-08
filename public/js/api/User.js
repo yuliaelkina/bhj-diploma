@@ -4,7 +4,8 @@
  * Имеет свойство URL, равное '/user'.
  * */
 class User {
-  url = "/user";
+
+  static URL = "/user";
   /**
    * Устанавливает текущего пользователя в
    * локальном хранилище.
@@ -43,7 +44,8 @@ class User {
    * сохранить пользователя через метод
    * User.setCurrent.
    * */
-  static login( data, callback) {
+  static login(data, callback) {
+    console.log(data);
     createRequest({
       url: this.URL + '/login',
       method: 'POST',
