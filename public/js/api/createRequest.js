@@ -14,9 +14,9 @@ const createRequest = (options = {}) => {
     xhr.send();
   };
   xhr.onreadystatechange = function() {
-    console.log(xhr.readyState);
     if(xhr.readyState === 4) {
-      options.callback(err = false, this.response);
+      console.log(this.response);
+      options.callback(this.response.error, this.response);
     };
   }
 }

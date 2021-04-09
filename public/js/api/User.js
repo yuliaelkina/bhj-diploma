@@ -11,7 +11,7 @@ class User {
    * локальном хранилище.
    * */
   static setCurrent(user) {
-    localStorage.setItem("userdata") = JSON.stringify(user);
+    localStorage.setItem("userdata", `${JSON.stringify(user)}`);
   }
 
   /**
@@ -53,8 +53,9 @@ class User {
       callback: (err, response) => {
         console.log(response.user);
         if (response && response.user) {
-          callback(err, response);
+          this.setCurrent(response.user);
         }
+        callback(err, response);
       }
     });
   }
@@ -84,7 +85,7 @@ class User {
    * Производит выход из приложения. После успешного
    * выхода необходимо вызвать метод User.unsetCurrent
    * */
-  static logout( data, callback) {
+  static logout(data, callback) {
 
   }
 }
