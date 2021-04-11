@@ -153,7 +153,6 @@ asyncForm.submit();
 const form = document.getElementById( 'myform' ),
     formData = new FormData( form ),
     entries = formData.entries();
-
 for (let item of entries) {
   const key = item[ 0 ],
     value = item[ 1 ];
