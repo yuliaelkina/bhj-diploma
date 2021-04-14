@@ -39,16 +39,18 @@ class User {
       url: this.URL + '/current',
       method: 'GET',
       callback: (err, response) => {
-        if (response.success == true) {
+        if (response && response.success == true) {
           this.setCurrent(response.user);
         }
-        else {
+        else if (response && response.success == false) {
           this.unsetCurrent();
+        }
+        else if (err) {
+          alert("сервер не отвечает");
         }
         callback(err, response);
       }
     });
-
   }
 
   /**
@@ -63,7 +65,6 @@ class User {
       method: 'POST',
       data,
       callback: (err, response) => {
-        console.log(response.user);
         if (response && response.user) {
           this.setCurrent(response.user);
         }
