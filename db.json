@@ -28,6 +28,21 @@
       "name": "Бизнес",
       "user_id": "1",
       "id": "3"
+    },
+    {
+      "name": "сбербанк",
+      "user_id": "18t2e17gckn9crs8x",
+      "id": "18t2e19jcknm4g327"
+    },
+    {
+      "name": "trt",
+      "user_id": "18t2e17gckn9crs8x",
+      "id": "18t2e19qgknm4up4n"
+    },
+    {
+      "name": "gj",
+      "user_id": "18t2e17gckn9crs8x",
+      "id": "18t2e1a0fknm5l5n0"
     }
   ],
   "transactions": [

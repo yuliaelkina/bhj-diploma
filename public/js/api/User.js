@@ -68,6 +68,12 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
+        else if (response.success == false){
+          alert(response.error);
+        }
+        else if (err != null) {
+          alert("сервер не отвечает");
+        }
         callback(err, response);
       }
     });
@@ -88,6 +94,12 @@ class User {
         if (response && response.user) {
           this.setCurrent(response.user);
         }
+        else if (response.success == false){
+          alert(response.error);
+        }
+        else if (err != null) {
+          alert("сервер не отвечает");
+        }
         callback(err, response);
       }
     });
@@ -105,6 +117,9 @@ class User {
       callback: (err, response) => {
         if (response && response.success) {
           this.unsetCurrent();
+        }
+        else if (err != null) {
+          alert("сервер не отвечает");
         }
         callback(err, response);
       }

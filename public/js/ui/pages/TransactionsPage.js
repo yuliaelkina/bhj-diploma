@@ -10,8 +10,12 @@ class TransactionsPage {
    * Сохраняет переданный элемент и регистрирует события
    * через registerEvents()
    * */
-  constructor( element ) {
-
+  constructor(element) {
+    if (!element) {
+      throw new Error("элемент не передан");
+    };
+    this.element = element;
+    this.registerEvents();
   }
 
   /**

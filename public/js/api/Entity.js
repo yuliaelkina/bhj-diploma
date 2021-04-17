@@ -9,8 +9,18 @@ class Entity {
    * Это могут быть счета или доходы/расходы
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static list(data, callback){
-
+  static list(data, callback) {
+    createRequest({
+      url: this.URL,
+      method: 'GET',
+      data,
+      callback: (err, response) => {
+        if (err) {
+          alert("сервер не отвечает");
+        }
+        callback(err, response);
+      }
+    });
   }
 
   /**
@@ -19,14 +29,34 @@ class Entity {
    * что наследуется от Entity)
    * */
   static create(data, callback) {
-
+    createRequest({
+      url: this.URL,
+      method: "PUT",
+      data,
+      callback: (err, response) => {
+        if (err) {
+          alert("сервер не отвечает");
+        }
+        callback(err, response);
+      }
+    })
   }
 
   /**
    * Удаляет информацию о счёте или доходе/расходе
    * (в зависимости от того, что наследуется от Entity)
    * */
-  static remove(data, callback ) {
-
+  static remove(data, callback) {
+    createRequest({
+      url: this.URL,
+      method: 'DELETE',
+      data,
+      callback: (err, response) => {
+        if (err) {
+          alert("сервер не отвечает");
+        }
+        callback(err, response);
+      }
+    })
   }
 }

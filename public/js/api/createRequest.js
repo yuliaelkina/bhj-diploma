@@ -26,10 +26,11 @@ const createRequest = (options = {}) => {
   }
    catch(e) {
     const err = new Error(e);
+    options.callback(err);
   }
   xhr.onreadystatechange = function() {
     if(xhr.readyState === 4) {
-      options.callback(err = false, this.response);
+      options.callback(null, this.response);
     };
   }
 }
