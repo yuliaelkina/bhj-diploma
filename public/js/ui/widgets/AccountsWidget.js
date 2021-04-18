@@ -32,7 +32,7 @@ class AccountsWidget {
   registerEvents() {
     this.element.querySelector(".create-account").addEventListener("click", () => App.getModal("createAccount").open());
     this.element.querySelectorAll(".account").forEach((el) => el.addEventListener("click", (e) => {e.preventDefault();
-    this.onSelectAccount(el)}))
+    this.onSelectAccount(el)}));
   }
 
   /**
@@ -66,7 +66,6 @@ class AccountsWidget {
    * */
   clear() {
     document.querySelectorAll(".account").forEach((el) => el.parentNode.removeChild(el));
-
   }
 
   /**
@@ -87,14 +86,14 @@ class AccountsWidget {
    * отображения в боковой колонке.
    * item - объект с данными о счёте
    * */
-  getAccountHTML(item){ 
+  getAccountHTML(item) { 
     return `
-    <li class="account" data-id="${item.id}">
-    <a href="#">
+      <li class="account" data-id="${item.id}">
+      <a href="#">
         <span>${item.name}</span> /
         <span>${item.sum}</span>
-    </a>
-</li>
+      </a>
+      </li>
     `
   }
 
@@ -104,7 +103,7 @@ class AccountsWidget {
    * AccountsWidget.getAccountHTML HTML-код элемента
    * и добавляет его внутрь элемента виджета
    * */
-  renderItem(data){
-    data.forEach((item) => this.element.innerHTML += this.getAccountHTML(item))
+  renderItem(data) {
+    data.forEach((item) => this.element.innerHTML += this.getAccountHTML(item));
   }
 }
