@@ -30,9 +30,13 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-    this.element.querySelector(".create-account").addEventListener("click", () => App.getModal("createAccount").open());
-    this.element.querySelectorAll(".account").forEach((el) => el.addEventListener("click", (e) => {e.preventDefault();
-    this.onSelectAccount(el)}));
+    this.element.querySelector(".create-account").addEventListener("click", (e) => {
+      e.preventDefault();
+      App.getModal("createAccount").open()});
+    this.element.querySelectorAll(".account").forEach((el) => el.addEventListener("click", (e) => {
+      e.preventDefault();
+    this.onSelectAccount(el);
+  }));
   }
 
   /**
@@ -51,6 +55,7 @@ class AccountsWidget {
         if (response.success) {
           this.clear();
           this.renderItem(response.data);
+          this.registerEvents();
         }
         else {
           alert(err);
@@ -78,7 +83,7 @@ class AccountsWidget {
   onSelectAccount(element) {
     document.querySelectorAll(".account").forEach((el) => el.classList.remove("active"));
     element.classList.add("active");
-    App.showPage("transactions", {"account_id": element.getAttribute("data-id")});
+    App.showPage('transactions', { "account_id" : element.getAttribute("data-id")});
   }
 
   /**

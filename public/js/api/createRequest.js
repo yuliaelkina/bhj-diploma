@@ -7,18 +7,22 @@ const createRequest = (options = {}) => {
   let params = "";
   let formData;
   xhr.responseType = "json";
+  xhr.withCredentials = true;
   if (options.data && options.method != "GET") {
     formData = new FormData;
     for (let key in options.data) {
       formData.append(key, options.data[key]);
     };
   }
-  else {
+  else if (options.data) {
     params = "?";
     for (let item in options.data) {
       params += `${item[0]}=${encodeURIComponent(item[1])}&`;
     };
-  };
+  }
+  else if(options.id) {
+    params += `/${options.id}`;
+  }
   try {
     xhr.open(options.method, options.url + params);
     xhr.send(formData);

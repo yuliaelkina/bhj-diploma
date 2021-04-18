@@ -22,8 +22,8 @@ class TransactionsPage {
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-    if (this.lastOptions) {
-      this.render(this.lastOptions);
+    if (this.lastOptions != undefined) {
+    this.render(this.lastOptions);
     }
     else {
       this.render();
@@ -57,8 +57,8 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-    if (this.lastOptions != "") {
-      Account.remove(this.lastOptions["account_id"], (err, response) => {
+    if (this.lastOptions != undefined) {
+      Account.remove(this.lastOptions.account_id, (err, response) => {
       if (response.success) {
         App.updateWidgets();
       }
@@ -66,7 +66,7 @@ class TransactionsPage {
         alert(err);
       };
     });
-    TransactionsPage.clear();
+    this.clear();
     }
   }
 
@@ -95,11 +95,11 @@ class TransactionsPage {
    * в TransactionsPage.renderTransactions()
    * */
   render(options) {
-    if (options) {
+    if (options != undefined) {
       this.lastOptions = options;
-      Account.get(options, (err, response) => {
+      Account.get(options.account_id, (err, response) => {
         if (response.success) {
-          this.renderTitle(response.name);
+          this.renderTitle(response.data.name);
         }
         else {
           alert(err);
@@ -122,9 +122,9 @@ class TransactionsPage {
    * Устанавливает заголовок: «Название счёта»
    * */
   clear() {
-    this.renderTransactions([]);
+    this.renderTransactions();
     document.querySelector(".content-title").innerText = "Название счета";
-    this.lastOptions = "";
+    delete this.lastOptions;
   }
 
   /**
@@ -179,7 +179,7 @@ class TransactionsPage {
    * Отрисовывает список транзакций на странице
    * используя getTransactionHTML
    * */
-  renderTransactions(data){
-    data.forEach((el) => this.element.querySelector(".content").innerHTML += this.getTransactionHTML(el));
+  renderTransactions(data) {
+    data.forEach((item) => this.element.querySelector(".content").innerHTML += this.getTransactionHTML(item));
   }
 }
