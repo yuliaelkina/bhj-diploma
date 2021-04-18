@@ -32,7 +32,14 @@ class TransactionsPage {
    * TransactionsPage.removeAccount соответственно
    * */
   registerEvents() {
-
+    this.element.querySelector(".remove-account").addEventListener("click", (e) => {
+      e.preventDefault();
+      this.removeAccount();
+    });
+    this.element.querySelectorAll(".transaction__remove").forEach((el) => {el.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.removeTransaction(el.getAttribute("data-id"));
+    });})
   }
 
   /**

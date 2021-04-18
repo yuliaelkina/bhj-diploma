@@ -12,7 +12,7 @@ class Entity {
   static list(data, callback) {
     createRequest({
       url: this.URL,
-      method: 'GET',
+      method: "GET",
       data,
       callback: (err, response) => {
         if (err) {
@@ -49,7 +49,7 @@ class Entity {
   static remove(data, callback) {
     createRequest({
       url: this.URL,
-      method: 'DELETE',
+      method: "DELETE",
       data,
       callback: (err, response) => {
         if (err) {
