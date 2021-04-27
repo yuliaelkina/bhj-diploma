@@ -15,7 +15,6 @@ class TransactionsPage {
       throw new Error("элемент не передан");
     };
     this.element = element;
-    this.registerEvents();
   }
 
   /**
@@ -43,7 +42,7 @@ class TransactionsPage {
     });
     this.element.querySelectorAll(".transaction__remove").forEach((el) => {el.addEventListener("click", (e) => {
       e.preventDefault();
-      this.removeTransaction(el.getAttribute("data-id"));
+      this.removeTransaction({id: el.getAttribute("data-id")});
     });})
   }
 
@@ -57,16 +56,18 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-    if (this.lastOptions != undefined) {
-      Account.remove(this.lastOptions.account_id, (err, response) => {
+    const result = confirm("Вы действительно хотите удалить счет?");
+    if (this.lastOptions != undefined && result == true) {
+      Account.remove({id: this.lastOptions.account_id}, (err, response) => {
       if (response.success) {
+        console.log(response);
         App.updateWidgets();
+        this.clear();
       }
       else {
         alert(err);
       };
     });
-    this.clear();
     }
   }
 
@@ -78,14 +79,18 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction(id) {
-    Transaction.remove(id, (err, response) => {
-      if (response.success) {
-        App.updateWidgets();
-      }
-      else {
-        alert(err);
-      };
-    })
+    const result = confirm("Вы действительно хотите удалить транзакцию?");
+    if (result == true) {
+      Transaction.remove(id, (err, response) => {
+        if (response.success) {
+          App.updateWidgets();
+          App.updatePages();
+        }
+        else {
+          alert(err);
+        };
+      })
+    }
   }
 
   /**
@@ -135,13 +140,13 @@ class TransactionsPage {
   }
 
   /**
-   * Форматирует дату в формате 2019-03-10 03:20:41 (строка)
+   * Форматирует дату в формате 0219-03-10 03:20:41 (строка)
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
     const months = ["", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
     return `
-    ${date.substring(8,10)} ${months[date.substring(6,8)]} ${date.substring(0,5)} в ${date.substring(11,16)}
+    ${date.substring(8,10)} ${months[parseInt(date.substring(5,7))]} ${date.substring(0,4)} в ${date.substring(11,16)}
     `
   }
 
@@ -157,7 +162,7 @@ class TransactionsPage {
           <span class="fa fa-money fa-2x"></span>
       </div>
       <div class="transaction__info">
-          <h4 class="transaction__title">Новый будильник</h4>
+          <h4 class="transaction__title">${item.name}</h4>
           <div class="transaction__date">${this.formatDate(item.created_at)}</div>
       </div>
     </div>
@@ -180,6 +185,10 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data) {
+    this.element.querySelector(".content").innerHTML = "";
+    if (data) {
     data.forEach((item) => this.element.querySelector(".content").innerHTML += this.getTransactionHTML(item));
+    }
+    this.registerEvents();
   }
 }

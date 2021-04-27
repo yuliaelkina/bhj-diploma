@@ -8,6 +8,7 @@ const createRequest = (options = {}) => {
   let formData;
   xhr.responseType = "json";
   xhr.withCredentials = true;
+  console.log(options.data);
   if (options.data && options.method != "GET") {
     formData = new FormData;
     for (let key in options.data) {
@@ -17,10 +18,10 @@ const createRequest = (options = {}) => {
   else if (options.data) {
     params = "?";
     for (let item in options.data) {
-      params += `${item[0]}=${encodeURIComponent(item[1])}&`;
+      params += `${item}=${encodeURIComponent(options.data[item])}&`;
     };
   }
-  else if(options.id) {
+  else if(options.id && options.method == "GET") {
     params += `/${options.id}`;
   }
   try {
